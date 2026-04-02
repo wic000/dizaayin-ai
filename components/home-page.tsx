@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 import { MobileShell } from "@/components/mobile-shell";
 import { SectionHeader } from "@/components/section-header";
@@ -44,15 +44,10 @@ export function HomePage() {
           {profile?.user?.firstName ? `${profile.user.firstName}, ` : ""}
           mobile-first AI interior redesign flow for apartments, houses, offices, and unfinished rooms in Uzbekistan.
         </p>
-        <div className="mt-5 flex gap-3">
-          <Link className="flex-1" href="/create">
+        <div className="mt-5">
+          <Link className="block" href="/create">
             <Button className="w-full" type="button">
               {dict.home.primaryCta}
-            </Button>
-          </Link>
-          <Link className="flex-1" href="/templates">
-            <Button className="w-full border-white/15 bg-white/10 text-white" type="button" variant="outline">
-              {dict.home.secondaryCta}
             </Button>
           </Link>
         </div>
@@ -69,23 +64,9 @@ export function HomePage() {
         </div>
       </Card>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         <StatCard label={dict.profile.generated} value={profile?.stats.generationCount ?? 0} />
-        <StatCard label={dict.profile.orders} value={profile?.stats.premiumOrderCount ?? 0} />
       </div>
-
-      <Card className="flex items-center justify-between gap-3">
-        <div>
-          <p className="text-base font-bold">Admin workspace</p>
-          <p className="mt-1 text-sm text-foreground/70 dark:text-white/70">Interior requests, room generations, templates, announcements, and manual premium projects.</p>
-        </div>
-        <Link href="/admin">
-          <Button size="sm" type="button" variant="secondary">
-            {dict.common.admin}
-            <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button>
-        </Link>
-      </Card>
     </MobileShell>
   );
 }

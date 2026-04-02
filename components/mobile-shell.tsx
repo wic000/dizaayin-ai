@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { History, Home, Layers3, PlusSquare, Sparkles, UserRound } from "lucide-react";
+import { History, Home, PlusSquare, UserRound } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -11,9 +11,7 @@ import { cn } from "@/lib/utils";
 const items = [
   { href: "/", key: "home", icon: Home },
   { href: "/create", key: "create", icon: PlusSquare },
-  { href: "/templates", key: "templates", icon: Layers3 },
   { href: "/history", key: "history", icon: History },
-  { href: "/premium", key: "premium", icon: Sparkles },
   { href: "/profile", key: "profile", icon: UserRound }
 ] as const;
 
