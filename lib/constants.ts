@@ -6,25 +6,27 @@ export const ADMIN_TELEGRAM_IDS = (process.env.ADMIN_TELEGRAM_IDS || "")
   .filter(Boolean);
 
 export const PURPOSE_OPTIONS = [
-  "instagram_post",
-  "instagram_story",
-  "telegram_post",
-  "olx_banner",
-  "marketplace_card",
-  "sale_poster",
-  "product_ad"
+  "living_room",
+  "bedroom",
+  "kitchen",
+  "bathroom",
+  "office",
+  "facade",
+  "studio"
 ] as const;
 
 export const STYLE_OPTIONS = [
-  "premium",
-  "luxury",
   "modern",
+  "luxury",
+  "minimal",
+  "scandinavian",
+  "classic",
+  "warm",
   "dark",
   "bright",
-  "minimal",
-  "tech",
+  "industrial",
   "kids",
-  "sale"
+  "premium"
 ] as const;
 
 export const LANGUAGE_OPTIONS = ["uz", "ru", "en"] as const;

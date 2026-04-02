@@ -42,7 +42,7 @@ export function HomePage() {
         <Badge className="bg-white/10 text-white">{dict.home.badge}</Badge>
         <p className="mt-4 text-sm leading-6 text-white/74">
           {profile?.user?.firstName ? `${profile.user.firstName}, ` : ""}
-          mobile-first AI design flow for Uzbekistan sellers.
+          mobile-first AI interior redesign flow for apartments, houses, offices, and unfinished rooms in Uzbekistan.
         </p>
         <div className="mt-5 flex gap-3">
           <Link className="flex-1" href="/create">
@@ -77,7 +77,7 @@ export function HomePage() {
       <Card className="flex items-center justify-between gap-3">
         <div>
           <p className="text-base font-bold">Admin workspace</p>
-          <p className="mt-1 text-sm text-foreground/70 dark:text-white/70">Templates, pricing, announcements, and failed jobs.</p>
+          <p className="mt-1 text-sm text-foreground/70 dark:text-white/70">Interior requests, room generations, templates, announcements, and manual premium projects.</p>
         </div>
         <Link href="/admin">
           <Button size="sm" type="button" variant="secondary">

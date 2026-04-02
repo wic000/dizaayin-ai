@@ -2,21 +2,21 @@ export type Locale = "uz" | "ru" | "en";
 
 export const translations = {
   uz: {
-    nav: { home: "Bosh sahifa", create: "Yaratish", templates: "Shablonlar", history: "Tarix", premium: "Premium", profile: "Profil" },
+    nav: { home: "Bosh sahifa", create: "Dizayn", templates: "Variantlar", history: "Tarix", premium: "Premium", profile: "Profil" },
     common: {
-      appName: "Optimall Design",
+      appName: "Optimall Interior AI",
       loading: "Yuklanmoqda...",
-      generate: "Vizual yaratish",
+      generate: "Dizayn yaratish",
       submit: "Yuborish",
       save: "Saqlash",
       retry: "Qayta urinish",
       download: "Yuklab olish",
-      rerun: "Qayta ishga tushirish",
+      rerun: "Qayta yaratish",
       logout: "Chiqish",
       admin: "Admin",
       empty: "Hali ma'lumot yo'q",
       language: "Til",
-      processing: "Tayyorlanmoqda",
+      processing: "Ishlanmoqda",
       completed: "Tayyor",
       failed: "Xato",
       queued: "Navbatda",
@@ -30,47 +30,47 @@ export const translations = {
       cancel: "Bekor qilish"
     },
     home: {
-      badge: "Telegram ichida ishlaydigan AI dizayn bot",
-      title: "Telefon uchun qulay marketing vizuallar",
-      subtitle: "Instagram, Telegram, OLX va marketplace uchun mahsulot rasmlaridan premium reklama kreativi tayyorlang.",
-      primaryCta: "Yangi dizayn boshlash",
-      secondaryCta: "Shablonlarni ko'rish",
-      quickTitle: "Tez yo'nalishlar",
-      quickItems: ["Instagram sotuvchilari", "Telegram shop egalari", "OLX sotuvchilari", "Elektronika do'konlari"],
+      badge: "Telegram ichidagi interior dizayn yordamchisi",
+      title: "Remont qilinmagan xonani chiroyli interyerga aylantiring",
+      subtitle: "Yangi qurilgan uy, qora suvoq xona yoki bo'sh joy rasmini yuklab, AI orqali ichki dizayn variantini ko'ring.",
+      primaryCta: "Yangi xona dizayni",
+      secondaryCta: "Tayyor variantlar",
+      quickTitle: "Mos yo'nalishlar",
+      quickItems: ["Mehmonxona", "Yotoqxona", "Oshxona", "Fasad"],
       statsTitle: "Profil statistikasi"
     },
     create: {
-      title: "Yangi dizayn",
-      subtitle: "Bir nechta mahsulot rasmini yuklang va tayyor prompt yoki o'z matningiz bilan natija oling.",
-      images: "Mahsulot rasmlari",
-      purpose: "Maqsad",
-      style: "Stil",
-      ratio: "Nisbat",
+      title: "Xona dizayni",
+      subtitle: "Xona rasmini yuklang, xona turini va stilni tanlang, AI sizga tayyor interyer konsept ko'rsatadi.",
+      images: "Xona rasmlari",
+      purpose: "Xona turi",
+      style: "Interyer stili",
+      ratio: "Rasm nisbati",
       language: "Natija tili",
-      customPrompt: "Qo'shimcha talab",
-      customPromptPlaceholder: "Masalan: narx uchun bo'sh joy qoldir, oltin rang aktsent qo'sh.",
-      templates: "Tayyor promptlar",
+      customPrompt: "Qo'shimcha istak",
+      customPromptPlaceholder: "Masalan: oq-bej ranglar bo'lsin, TV zona bo'lsin, oshxona oroli qo'shilsin.",
+      templates: "Tayyor dizayn variantlari",
       result: "Natija",
-      generating: "AI dizayn yaratilmoqda..."
+      generating: "AI interyer dizayn tayyorlamoqda..."
     },
     templates: {
-      title: "Prompt shablonlari",
-      subtitle: "Tayyor marketing promptlaridan birini tanlab, bir necha tegish bilan dizayn yarating."
+      title: "Dizayn variantlari",
+      subtitle: "Xona turiga mos tayyor interyer promptlardan foydalanib, tezroq natija oling."
     },
     history: {
-      title: "Generatsiyalar tarixi",
-      subtitle: "Oldingi natijalarni ko'ring, yuklab oling yoki yana ishga tushiring.",
-      original: "Asl rasm",
-      result: "Natija"
+      title: "Dizaynlar tarixi",
+      subtitle: "Oldingi before/after natijalarni ko'ring, yuklab oling yoki qayta yarating.",
+      original: "Asl xona",
+      result: "Yangi dizayn"
     },
     premium: {
-      title: "Premium buyurtma",
-      subtitle: "Murakkab banner, katalog, video cover yoki to'liq kreativ paketni admin jamoaga yuboring.",
-      helper: "Premium buyurtma admin paneliga tushadi va aloqangiz bo'yicha siz bilan bog'laniladi."
+      title: "Premium interior buyurtma",
+      subtitle: "Murakkab kvartira, ofis, fasad yoki to'liq loyiha uchun admin jamoaga buyurtma yuboring.",
+      helper: "Premium buyurtma admin paneliga tushadi va siz bilan aloqa orqali bog'laniladi."
     },
     profile: {
       title: "Profil",
-      subtitle: "Telegram profilingiz, til sozlamalari, yangiliklar va hisob ko'rsatkichlari.",
+      subtitle: "Telegram profilingiz, til sozlamalari, yangiliklar va yaratilgan interyer dizaynlar statistikasi.",
       announcements: "E'lonlar",
       stats: "Ko'rsatkichlar",
       generated: "Yaratilgan dizaynlar",
@@ -78,9 +78,9 @@ export const translations = {
     },
     admin: {
       title: "Admin panel",
-      subtitle: "Foydalanuvchilar, generatsiyalar, premium buyurtmalar va sozlamalar bir joyda.",
+      subtitle: "Foydalanuvchilar, xona dizaynlari, premium so'rovlar va shablonlar bir joyda.",
       users: "Foydalanuvchilar",
-      generations: "Generatsiyalar",
+      generations: "Dizaynlar",
       orders: "Buyurtmalar",
       templates: "Shablonlar",
       settings: "Sozlamalar",
@@ -88,16 +88,16 @@ export const translations = {
     }
   },
   ru: {
-    nav: { home: "Главная", create: "Создать", templates: "Шаблоны", history: "История", premium: "Премиум", profile: "Профиль" },
+    nav: { home: "Главная", create: "Дизайн", templates: "Варианты", history: "История", premium: "Премиум", profile: "Профиль" },
     common: {
-      appName: "Optimall Design",
+      appName: "Optimall Interior AI",
       loading: "Загрузка...",
-      generate: "Сгенерировать",
+      generate: "Создать дизайн",
       submit: "Отправить",
       save: "Сохранить",
       retry: "Повторить",
       download: "Скачать",
-      rerun: "Повторить",
+      rerun: "Сгенерировать снова",
       logout: "Выйти",
       admin: "Админ",
       empty: "Пока пусто",
@@ -116,47 +116,47 @@ export const translations = {
       cancel: "Отмена"
     },
     home: {
-      badge: "AI-дизайн бот внутри Telegram",
-      title: "Премиальные маркетинговые визуалы прямо с телефона",
-      subtitle: "Генерируйте креативы для Instagram, Telegram, OLX и маркетплейсов на основе фото товара.",
-      primaryCta: "Начать новый дизайн",
-      secondaryCta: "Открыть шаблоны",
-      quickTitle: "Для кого это",
-      quickItems: ["Instagram продавцы", "Telegram магазины", "OLX продавцы", "Магазины электроники"],
+      badge: "Interior design помощник внутри Telegram",
+      title: "Превратите пустую комнату в готовый интерьер",
+      subtitle: "Загрузите фото новой квартиры, черновой комнаты или фасада и получите AI-концепт интерьера.",
+      primaryCta: "Новый дизайн комнаты",
+      secondaryCta: "Готовые варианты",
+      quickTitle: "Подходит для",
+      quickItems: ["Гостиная", "Спальня", "Кухня", "Фасад"],
       statsTitle: "Статистика профиля"
     },
     create: {
-      title: "Новый дизайн",
-      subtitle: "Загрузите несколько фото товара и получите готовый рекламный визуал.",
-      images: "Фото товара",
-      purpose: "Формат",
-      style: "Стиль",
+      title: "Дизайн комнаты",
+      subtitle: "Загрузите фото комнаты, выберите тип помещения и стиль, затем получите интерьерный концепт.",
+      images: "Фото комнаты",
+      purpose: "Тип помещения",
+      style: "Стиль интерьера",
       ratio: "Соотношение",
       language: "Язык результата",
-      customPrompt: "Дополнительный запрос",
-      customPromptPlaceholder: "Например: оставь место под цену и добавь золотые акценты.",
-      templates: "Готовые промпты",
+      customPrompt: "Дополнительное пожелание",
+      customPromptPlaceholder: "Например: светлый бежевый интерьер, ТВ-зона, остров на кухне.",
+      templates: "Готовые интерьерные варианты",
       result: "Результат",
-      generating: "AI создает дизайн..."
+      generating: "AI готовит интерьерный дизайн..."
     },
     templates: {
-      title: "Шаблоны промптов",
-      subtitle: "Выберите готовый маркетинговый шаблон и быстро запустите генерацию."
+      title: "Варианты дизайна",
+      subtitle: "Используйте готовые интерьерные шаблоны для быстрого старта."
     },
     history: {
-      title: "История генераций",
-      subtitle: "Смотрите прошлые результаты, скачивайте и перезапускайте.",
-      original: "Исходник",
-      result: "Результат"
+      title: "История дизайнов",
+      subtitle: "Смотрите прошлые варианты, скачивайте и запускайте заново.",
+      original: "Исходная комната",
+      result: "Новый дизайн"
     },
     premium: {
-      title: "Премиум заказ",
-      subtitle: "Отправьте сложный дизайн, баннер, каталог или пакет креативов администратору.",
-      helper: "Заявка попадает в админ-панель, после чего с вами свяжутся по указанному контакту."
+      title: "Премиум заказ интерьера",
+      subtitle: "Отправьте сложный проект квартиры, офиса, фасада или полного ремонта администратору.",
+      helper: "Заявка попадет в админ-панель, после чего с вами свяжутся."
     },
     profile: {
       title: "Профиль",
-      subtitle: "Ваш Telegram-профиль, язык интерфейса, новости и статистика.",
+      subtitle: "Ваш Telegram-профиль, язык интерфейса, новости и статистика интерьерных генераций.",
       announcements: "Объявления",
       stats: "Статистика",
       generated: "Создано дизайнов",
@@ -164,9 +164,9 @@ export const translations = {
     },
     admin: {
       title: "Админ-панель",
-      subtitle: "Пользователи, генерации, заявки и настройки в одном месте.",
+      subtitle: "Пользователи, интерьерные генерации, премиум-заявки и шаблоны в одном месте.",
       users: "Пользователи",
-      generations: "Генерации",
+      generations: "Дизайны",
       orders: "Заказы",
       templates: "Шаблоны",
       settings: "Настройки",
@@ -174,16 +174,16 @@ export const translations = {
     }
   },
   en: {
-    nav: { home: "Home", create: "Create", templates: "Templates", history: "History", premium: "Premium", profile: "Profile" },
+    nav: { home: "Home", create: "Design", templates: "Concepts", history: "History", premium: "Premium", profile: "Profile" },
     common: {
-      appName: "Optimall Design",
+      appName: "Optimall Interior AI",
       loading: "Loading...",
-      generate: "Generate",
+      generate: "Generate design",
       submit: "Submit",
       save: "Save",
       retry: "Retry",
       download: "Download",
-      rerun: "Rerun",
+      rerun: "Regenerate",
       logout: "Log out",
       admin: "Admin",
       empty: "Nothing here yet",
@@ -202,47 +202,47 @@ export const translations = {
       cancel: "Cancel"
     },
     home: {
-      badge: "AI design bot built for Telegram",
-      title: "Premium marketing visuals designed for phones",
-      subtitle: "Turn product photos into polished ads for Instagram, Telegram, OLX, and marketplace cards.",
-      primaryCta: "Start a new design",
-      secondaryCta: "Browse templates",
-      quickTitle: "Built for",
-      quickItems: ["Instagram sellers", "Telegram shops", "OLX sellers", "Electronics stores"],
+      badge: "Interior design assistant for Telegram",
+      title: "Turn an unfinished room into a finished interior concept",
+      subtitle: "Upload a new-build room, empty apartment, or rough facade photo and get AI-generated interior redesign ideas.",
+      primaryCta: "Start a room redesign",
+      secondaryCta: "Browse concepts",
+      quickTitle: "Best for",
+      quickItems: ["Living room", "Bedroom", "Kitchen", "Facade"],
       statsTitle: "Profile stats"
     },
     create: {
-      title: "New design",
-      subtitle: "Upload one or more product images and generate an ad-ready visual with minimal taps.",
-      images: "Product images",
-      purpose: "Purpose",
-      style: "Style",
+      title: "Room redesign",
+      subtitle: "Upload room photos, choose the room type and style, then generate a realistic interior concept.",
+      images: "Room photos",
+      purpose: "Room type",
+      style: "Interior style",
       ratio: "Ratio",
       language: "Output language",
-      customPrompt: "Custom prompt",
-      customPromptPlaceholder: "For example: leave space for the price and add warm golden highlights.",
-      templates: "Ready prompts",
+      customPrompt: "Extra request",
+      customPromptPlaceholder: "For example: warm beige palette, TV wall, island kitchen, built-in storage.",
+      templates: "Ready interior concepts",
       result: "Result",
-      generating: "AI is generating your design..."
+      generating: "AI is preparing the interior redesign..."
     },
     templates: {
-      title: "Prompt templates",
-      subtitle: "Choose a production-ready prompt and launch a commercial visual quickly."
+      title: "Interior concepts",
+      subtitle: "Use ready-made interior templates to redesign rooms faster."
     },
     history: {
-      title: "Generation history",
-      subtitle: "Review previous outputs, download them, or rerun with one tap.",
-      original: "Original",
-      result: "Result"
+      title: "Design history",
+      subtitle: "Review previous before/after outputs, download them, or regenerate them.",
+      original: "Original room",
+      result: "New design"
     },
     premium: {
-      title: "Premium order",
-      subtitle: "Send advanced design requests, campaign packs, or custom banners to the admin team.",
-      helper: "Premium requests appear in the admin panel and can be handled manually by your team."
+      title: "Premium interior order",
+      subtitle: "Send advanced apartment, office, facade, or full renovation requests to the admin team.",
+      helper: "Premium requests appear in the admin panel so your team can handle them manually."
     },
     profile: {
       title: "Profile",
-      subtitle: "Your Telegram details, language, recent announcements, and account stats.",
+      subtitle: "Your Telegram profile, language settings, announcements, and interior design stats.",
       announcements: "Announcements",
       stats: "Stats",
       generated: "Designs generated",
@@ -250,9 +250,9 @@ export const translations = {
     },
     admin: {
       title: "Admin panel",
-      subtitle: "Users, generations, premium orders, templates, and settings in one place.",
+      subtitle: "Users, room redesign generations, premium requests, and templates in one place.",
       users: "Users",
-      generations: "Generations",
+      generations: "Designs",
       orders: "Orders",
       templates: "Templates",
       settings: "Settings",

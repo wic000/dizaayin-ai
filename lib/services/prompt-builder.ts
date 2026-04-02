@@ -9,41 +9,43 @@ type PromptBuilderInput = {
 };
 
 const languageMap: Record<string, string> = {
-  uz: "Write the composition guidance in Uzbek where text elements are required.",
-  ru: "Write the composition guidance in Russian where text elements are required.",
-  en: "Write the composition guidance in English where text elements are required."
+  uz: "Explain visible styling guidance in Uzbek if any labels or design notes are needed.",
+  ru: "Explain visible styling guidance in Russian if any labels or design notes are needed.",
+  en: "Explain visible styling guidance in English if any labels or design notes are needed."
 };
 
 const styleMap: Record<string, string> = {
-  premium: "premium advertising styling with polished reflections and balanced luxury lighting",
-  luxury: "luxury commercial art direction with elegant shadows, premium texture, rich detail",
-  modern: "clean contemporary ecommerce branding with crisp shapes and modern composition",
-  dark: "cinematic dark ad layout with dramatic contrast and deep shadows",
-  bright: "high-key bright campaign style with vibrant lighting and uplifting tone",
-  minimal: "minimal catalog design with plenty of whitespace and product focus",
-  tech: "tech-forward campaign visual with sleek gradients and futuristic lighting",
-  kids: "friendly playful design with colorful accents and family-safe mood",
-  sale: "high-converting sale campaign visual with clear promo zones and urgency"
+  premium: "premium interior styling with architect-level composition and elegant materials",
+  luxury: "luxury residential interior direction with refined textures, layered lighting, and expensive finishes",
+  modern: "clean modern interior with practical furniture layout and contemporary materials",
+  dark: "moody dark interior with dramatic contrast, warm ambient light, and rich surfaces",
+  bright: "bright airy interior with daylight emphasis, soft tones, and fresh spacious feel",
+  minimal: "minimal interior design with visual calm, integrated storage, and uncluttered surfaces",
+  scandinavian: "Scandinavian interior with warm wood, soft textiles, light walls, and functional comfort",
+  classic: "classic interior with timeless proportions, decorative moldings, and elegant balance",
+  warm: "warm cozy interior with inviting palette, layered textures, and comfortable lighting",
+  industrial: "industrial interior with clean geometry, dark metal details, concrete or wood accents",
+  kids: "safe playful children's interior with thoughtful storage and family-friendly softness"
 };
 
 const purposeMap: Record<string, string> = {
-  instagram_post: "Instagram feed post",
-  instagram_story: "Instagram story layout",
-  telegram_post: "Telegram sales post visual",
-  olx_banner: "OLX banner",
-  marketplace_card: "marketplace product card",
-  sale_poster: "sale poster",
-  product_ad: "product advertising creative"
+  living_room: "living room redesign",
+  bedroom: "bedroom redesign",
+  kitchen: "kitchen redesign",
+  bathroom: "bathroom redesign",
+  office: "home office redesign",
+  facade: "house facade redesign",
+  studio: "studio apartment redesign"
 };
 
 export function buildCommercialPrompt(input: PromptBuilderInput) {
   const sections = [
-    `Create a ${purposeMap[input.purpose] || input.purpose} using ${input.imageCount} reference product image(s).`,
-    `Keep the product absolutely recognizable and centered as the hero subject.`,
+    `Create a realistic ${purposeMap[input.purpose] || input.purpose} using ${input.imageCount} reference room image(s).`,
+    "Preserve the room geometry, window placement, door placement, and overall architecture from the source image.",
     `Visual direction: ${styleMap[input.style] || input.style}.`,
     `Target aspect ratio: ${input.ratio}.`,
-    `Commercial goals: sharp product edges, realistic proportions, premium lighting, clean background separation, ad-ready composition, professional color grading.`,
-    `Design rules: leave clean safe text zones, avoid clutter, avoid warped packaging, avoid extra fingers or duplicate products, avoid distorted logos, avoid unreadable text, avoid low-resolution surfaces.`,
+    "Interior goals: realistic renovation-ready result, balanced furniture layout, premium but believable materials, proper lighting plan, practical circulation, and clean zoning.",
+    "Design rules: avoid changing wall structure unless implied, avoid impossible furniture, avoid clutter, avoid warped perspective, avoid floating objects, avoid extra rooms, avoid deformed doors or windows.",
     languageMap[input.language] || languageMap.en
   ];
 
@@ -52,12 +54,10 @@ export function buildCommercialPrompt(input: PromptBuilderInput) {
   }
 
   if (input.customPrompt?.trim()) {
-    sections.push(`Custom request from seller: ${input.customPrompt.trim()}`);
+    sections.push(`Custom request from homeowner: ${input.customPrompt.trim()}`);
   }
 
-  sections.push(
-    "Output should look like a real ecommerce or social media campaign made by a professional marketing designer for sellers in Uzbekistan."
-  );
+  sections.push("Output should look like a real interior design concept prepared by a professional architect or interior designer in Uzbekistan.");
 
   return sections.join(" ");
 }

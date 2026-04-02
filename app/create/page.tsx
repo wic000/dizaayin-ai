@@ -15,28 +15,30 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/components/providers/language-provider";
 
 const purposeOptions = [
-  { value: "instagram_post", label: "Instagram post" },
-  { value: "instagram_story", label: "Instagram story" },
-  { value: "telegram_post", label: "Telegram post" },
-  { value: "olx_banner", label: "OLX banner" },
-  { value: "marketplace_card", label: "Marketplace card" },
-  { value: "sale_poster", label: "Sale poster" },
-  { value: "product_ad", label: "Product ad" }
+  { value: "living_room", label: "Living room" },
+  { value: "bedroom", label: "Bedroom" },
+  { value: "kitchen", label: "Kitchen" },
+  { value: "bathroom", label: "Bathroom" },
+  { value: "office", label: "Office" },
+  { value: "facade", label: "Facade" },
+  { value: "studio", label: "Studio" }
 ];
 
 const styleOptions = [
-  { value: "premium", label: "Premium" },
-  { value: "luxury", label: "Luxury" },
   { value: "modern", label: "Modern" },
+  { value: "luxury", label: "Luxury" },
+  { value: "minimal", label: "Minimal" },
+  { value: "scandinavian", label: "Scandinavian" },
+  { value: "classic", label: "Classic" },
+  { value: "warm", label: "Warm" },
   { value: "dark", label: "Dark" },
   { value: "bright", label: "Bright" },
-  { value: "minimal", label: "Minimal" },
-  { value: "tech", label: "Tech" },
+  { value: "industrial", label: "Industrial" },
   { value: "kids", label: "Kids" },
-  { value: "sale", label: "Sale" }
+  { value: "premium", label: "Premium" }
 ];
 
-const ratioOptions = ["1:1", "4:5", "9:16", "16:9"].map((value) => ({ value, label: value }));
+const ratioOptions = ["16:9", "9:16", "4:5", "1:1"].map((value) => ({ value, label: value }));
 const localeOptions = [
   { value: "uz", label: "Uzbek" },
   { value: "ru", label: "Russian" },
@@ -66,9 +68,9 @@ export default function CreatePage() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [templates, setTemplates] = useState<Template[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string | undefined>(searchParams.get("templateId") || undefined);
-  const [purpose, setPurpose] = useState("instagram_post");
-  const [style, setStyle] = useState("premium");
-  const [ratio, setRatio] = useState("4:5");
+  const [purpose, setPurpose] = useState("living_room");
+  const [style, setStyle] = useState("modern");
+  const [ratio, setRatio] = useState("16:9");
   const [outputLanguage, setOutputLanguage] = useState(locale);
   const [customPrompt, setCustomPrompt] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -166,6 +168,9 @@ export default function CreatePage() {
         <Card className="space-y-4">
           <p className="text-sm font-semibold">{dict.create.images}</p>
           <ImageUpload files={files} onChange={setFiles} />
+          <p className="text-xs leading-5 text-foreground/60 dark:text-white/60">
+            Empty room, rough renovation stage, new building room, facade, or unfinished apartment photos work best.
+          </p>
         </Card>
 
         <Card className="space-y-4">
