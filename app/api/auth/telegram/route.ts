@@ -19,8 +19,10 @@ export async function POST(request: NextRequest) {
 
     const { initData, language } = parsed.data;
     let telegramUser = initData ? verifyTelegramInitData(initData) : null;
+    const allowPreviewAuth =
+      process.env.NODE_ENV !== "production" || process.env.ALLOW_BROWSER_PREVIEW_AUTH === "true";
 
-    if (!telegramUser && process.env.NODE_ENV !== "production" && process.env.DEV_TELEGRAM_ID) {
+    if (!telegramUser && allowPreviewAuth && process.env.DEV_TELEGRAM_ID) {
       telegramUser = {
         id: Number(process.env.DEV_TELEGRAM_ID),
         username: process.env.DEV_TELEGRAM_USERNAME || "dev_user",
