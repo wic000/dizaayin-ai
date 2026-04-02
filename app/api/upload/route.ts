@@ -6,7 +6,6 @@ export const dynamic = "force-dynamic";
 import { apiError, apiOk } from "@/lib/api";
 import { ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_FILES, MAX_UPLOAD_SIZE_BYTES } from "@/lib/constants";
 import { requireSession } from "@/lib/auth/session";
-import { uploadBufferToStorage } from "@/lib/services/storage";
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,17 +35,12 @@ export async function POST(request: NextRequest) {
       const arrayBuffer = await file.arrayBuffer();
       const ext = file.name.split(".").pop() || "jpg";
       const path = `${session.telegramId}/${Date.now()}-${randomUUID()}.${ext}`;
-
-      const result = await uploadBufferToStorage({
-        bucket: "uploads",
-        path,
-        buffer: Buffer.from(arrayBuffer),
-        contentType: file.type
-      });
+      const dataUrl = `data:${file.type};base64,${Buffer.from(arrayBuffer).toString("base64")}`;
 
       uploaded.push({
-        path: result.path,
-        publicUrl: result.publicUrl,
+        path: dataUrl,
+        publicUrl: dataUrl,
+        storagePath: path,
         mimeType: file.type,
         sizeBytes: file.size
       });
@@ -54,6 +48,8 @@ export async function POST(request: NextRequest) {
 
     return apiOk({ files: uploaded });
   } catch (error) {
-    return apiError(error instanceof Error ? error.message : "Upload failed.", 500);
+    const message = error instanceof Error ? error.message : "Upload failed.";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return apiError(message, status);
   }
 }

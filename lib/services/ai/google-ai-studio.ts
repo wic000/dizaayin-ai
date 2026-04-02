@@ -31,7 +31,19 @@ export async function generateVisualWithGoogleAiStudio(input: GenerateVisualInpu
   ];
 
   for (const image of input.images) {
-    if (image.publicUrl) {
+    if (image.path.startsWith("data:")) {
+      const [, mimeType = "image/jpeg", base64Data = ""] =
+        image.path.match(/^data:(.+?);base64,(.+)$/) || [];
+
+      if (base64Data) {
+        parts.push({
+          inlineData: {
+            mimeType,
+            data: base64Data
+          }
+        });
+      }
+    } else if (image.publicUrl) {
       parts.push({
         fileData: {
           mimeType: image.mimeType || "image/jpeg",

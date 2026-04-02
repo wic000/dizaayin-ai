@@ -32,7 +32,12 @@ function serializeGeneration(generation: GenerationWithImages) {
       id: image.id,
       kind: image.kind,
       path: image.path,
-      url: image.kind === "OUTPUT" ? getPublicStorageUrl("results", image.path) : getPublicStorageUrl("uploads", image.path)
+      url:
+        image.path.startsWith("data:")
+          ? image.path
+          : image.kind === "OUTPUT"
+            ? getPublicStorageUrl("results", image.path)
+            : getPublicStorageUrl("uploads", image.path)
     }))
   };
 }
@@ -115,18 +120,25 @@ export async function POST(request: Request) {
         ratio: parsed.data.ratio,
         images: parsed.data.imagePaths.map((image) => ({
           path: image.path,
-          publicUrl: getPublicStorageUrl("uploads", image.path),
+          publicUrl: image.path.startsWith("data:") ? undefined : getPublicStorageUrl("uploads", image.path),
           mimeType: image.mimeType
         }))
       });
 
-      const outputPath = `${session.telegramId}/generated/${generation.id}-${randomUUID()}.png`;
-      await uploadBufferToStorage({
-        bucket: "results",
-        path: outputPath,
-        buffer: Buffer.from(aiResult.base64Data, "base64"),
-        contentType: aiResult.mimeType
-      });
+      let outputPath = `data:${aiResult.mimeType};base64,${aiResult.base64Data}`;
+
+      try {
+        const storagePath = `${session.telegramId}/generated/${generation.id}-${randomUUID()}.png`;
+        await uploadBufferToStorage({
+          bucket: "results",
+          path: storagePath,
+          buffer: Buffer.from(aiResult.base64Data, "base64"),
+          contentType: aiResult.mimeType
+        });
+        outputPath = storagePath;
+      } catch {
+        // Fall back to inline data URLs when storage is unavailable.
+      }
 
       const updated = await prisma.generation.update({
         where: { id: generation.id },
