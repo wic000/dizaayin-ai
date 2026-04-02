@@ -2,10 +2,10 @@ import { sleep } from "@/lib/utils";
 
 import type { GenerateVisualInput, GenerateVisualResult } from "./types";
 
-const DEFAULT_MODEL = process.env.GOOGLE_AI_STUDIO_MODEL || "gemini-2.0-flash-exp";
+const DEFAULT_MODEL = process.env.GOOGLE_AI_STUDIO_MODEL || "imagen-4.0-generate-001";
 const DEFAULT_ENDPOINT =
   process.env.GOOGLE_AI_STUDIO_ENDPOINT ||
-  `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:generateContent`;
+  `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:predict`;
 
 function normalizeRatio(ratio: string) {
   switch (ratio) {
@@ -24,44 +24,16 @@ export async function generateVisualWithGoogleAiStudio(input: GenerateVisualInpu
     throw new Error("GOOGLE_AI_STUDIO_API_KEY is missing.");
   }
 
-  const parts: Array<Record<string, unknown>> = [
-    {
-      text: `${input.prompt}\n\nReturn a single high-quality generated commercial image. Aspect preference: ${normalizeRatio(input.ratio)}.`
-    }
-  ];
-
-  for (const image of input.images) {
-    if (image.path.startsWith("data:")) {
-      const [, mimeType = "image/jpeg", base64Data = ""] =
-        image.path.match(/^data:(.+?);base64,(.+)$/) || [];
-
-      if (base64Data) {
-        parts.push({
-          inlineData: {
-            mimeType,
-            data: base64Data
-          }
-        });
-      }
-    } else if (image.publicUrl) {
-      parts.push({
-        fileData: {
-          mimeType: image.mimeType || "image/jpeg",
-          fileUri: image.publicUrl
-        }
-      });
-    }
-  }
-
   const payload = {
-    contents: [
+    instances: [
       {
-        role: "user",
-        parts
+        prompt: `${input.prompt}\n\nPhotorealistic interior design render. Aspect ratio: ${input.ratio}.`
       }
     ],
-    generationConfig: {
-      responseModalities: ["TEXT", "IMAGE"]
+    parameters: {
+      sampleCount: 1,
+      aspectRatio: input.ratio,
+      personGeneration: "dont_allow"
     }
   };
 
@@ -88,25 +60,19 @@ export async function generateVisualWithGoogleAiStudio(input: GenerateVisualInpu
       }
 
       const data = await response.json();
-      const partsOut =
-        data?.candidates?.[0]?.content?.parts ||
-        data?.candidates?.[0]?.parts ||
-        data?.outputs?.[0]?.content?.parts ||
-        [];
+      const bytes =
+        data?.predictions?.[0]?.bytesBase64Encoded ||
+        data?.generatedImages?.[0]?.image?.imageBytes;
 
-      const inlineData = partsOut.find((part: Record<string, unknown>) => part.inlineData) as
-        | { inlineData?: { data?: string; mimeType?: string } }
-        | undefined;
-
-      if (!inlineData?.inlineData?.data) {
+      if (!bytes) {
         throw new Error("Image was not returned by the provider.");
       }
 
       return {
         provider: "google-ai-studio",
-        providerJobId: data?.responseId,
-        mimeType: inlineData.inlineData.mimeType || "image/png",
-        base64Data: inlineData.inlineData.data
+        providerJobId: data?.predictions?.[0]?.mimeType || data?.responseId,
+        mimeType: "image/png",
+        base64Data: bytes
       };
     } catch (error) {
       clearTimeout(timer);
