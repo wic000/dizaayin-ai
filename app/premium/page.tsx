@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { ImageUpload, type UploadPreview } from "@/components/image-upload";
 import { MobileShell } from "@/components/mobile-shell";
@@ -13,46 +14,73 @@ import { useLanguage } from "@/components/providers/language-provider";
 
 export default function PremiumPage() {
   const { dict } = useLanguage();
+  const router = useRouter();
   const [files, setFiles] = useState<UploadPreview[]>([]);
-  const [uploadedFiles, setUploadedFiles] = useState<Array<{ path: string; mimeType: string }>>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");
   const [username, setUsername] = useState("");
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  const syncUploads = async (nextFiles: UploadPreview[]) => {
+  const syncUploads = (nextFiles: UploadPreview[]) => {
     setFiles(nextFiles);
-    if (!nextFiles.length) {
-      setUploadedFiles([]);
-      return;
-    }
-
-    const formData = new FormData();
-    nextFiles.forEach((entry) => formData.append("files", entry.file));
-
-    const response = await fetch("/api/upload", { method: "POST", body: formData });
-    const data = await response.json();
-    setUploadedFiles((data.files || []).map((file: { path: string; mimeType: string }) => ({ path: file.path, mimeType: file.mimeType })));
   };
 
   const submit = async () => {
-    const response = await fetch("/api/premium-orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        description,
-        deadline,
-        telegramUsername: username,
-        contact,
-        referenceImages: uploadedFiles
-      })
-    });
+    if (submitting) return;
 
-    const data = await response.json();
-    setMessage(response.ok ? "Premium request submitted." : data.error || "Request failed.");
+    setSubmitting(true);
+    setMessage(null);
+
+    const referenceNames = files.map((file) => file.file.name).join(", ");
+    const enrichedDescription = referenceNames
+      ? `${description}\n\nReference files selected by user: ${referenceNames}`
+      : description;
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+
+      const response = await fetch("/api/premium-orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          title,
+          description: enrichedDescription,
+          deadline,
+          telegramUsername: username,
+          contact,
+          referenceImages: []
+        })
+      });
+
+      clearTimeout(timeout);
+
+      const data = await response.json();
+      if (!response.ok) {
+        setMessage(data.error || "Request failed.");
+        return;
+      }
+
+      setMessage("Buyurtma yuborildi.");
+      setTitle("");
+      setDescription("");
+      setDeadline("");
+      setUsername("");
+      setContact("");
+      setFiles([]);
+
+      setTimeout(() => {
+        router.push("/history");
+      }, 800);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Request failed.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -67,8 +95,11 @@ export default function PremiumPage() {
           <Input placeholder="Telegram username" value={username} onChange={(event) => setUsername(event.target.value)} />
           <Input placeholder={dict.common.contact} value={contact} onChange={(event) => setContact(event.target.value)} />
           <ImageUpload files={files} onChange={syncUploads} />
-          <Button className="w-full" type="button" onClick={submit}>
-            {dict.common.submit}
+          <p className="text-xs leading-5 text-foreground/60 dark:text-white/60">
+            Buyurtma qotib qolmasligi uchun reference rasmlar hozir faqat preview sifatida tanlanadi. Asosiy so'rov tez yuboriladi.
+          </p>
+          <Button className="w-full" disabled={submitting} type="button" onClick={submit}>
+            {submitting ? "Yuborilmoqda..." : dict.common.submit}
           </Button>
           {message ? <p className="text-sm text-foreground/72 dark:text-white/72">{message}</p> : null}
         </Card>
