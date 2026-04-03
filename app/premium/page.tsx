@@ -89,11 +89,26 @@ export default function PremiumPage() {
       <MobileShell title={dict.premium.title} subtitle={dict.premium.subtitle}>
         <Card className="text-sm leading-6">{dict.premium.helper}</Card>
         <Card className="space-y-4">
-          <Input placeholder={dict.common.title} value={title} onChange={(event) => setTitle(event.target.value)} />
-          <Textarea placeholder={dict.common.description} value={description} onChange={(event) => setDescription(event.target.value)} />
-          <Input type="date" value={deadline} onChange={(event) => setDeadline(event.target.value)} />
-          <Input placeholder="Telegram username" value={username} onChange={(event) => setUsername(event.target.value)} />
-          <Input placeholder={dict.common.contact} value={contact} onChange={(event) => setContact(event.target.value)} />
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/55 dark:text-white/55">Loyiha nomi</p>
+            <Input placeholder={dict.common.title} value={title} onChange={(event) => setTitle(event.target.value)} />
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/55 dark:text-white/55">Tavsif</p>
+            <Textarea placeholder={dict.common.description} value={description} onChange={(event) => setDescription(event.target.value)} />
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/55 dark:text-white/55">Muddat</p>
+            <Input type="date" value={deadline} onChange={(event) => setDeadline(event.target.value)} />
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/55 dark:text-white/55">Telegram username</p>
+            <Input placeholder="@username" value={username} onChange={(event) => setUsername(event.target.value)} />
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/55 dark:text-white/55">Telefon yoki aloqa</p>
+            <Input placeholder={dict.common.contact} value={contact} onChange={(event) => setContact(event.target.value)} />
+          </div>
           <ImageUpload files={files} onChange={syncUploads} />
           <p className="text-xs leading-5 text-foreground/60 dark:text-white/60">
             Buyurtma qotib qolmasligi uchun reference rasmlar hozir faqat preview sifatida tanlanadi. Asosiy so'rov tez yuboriladi.
