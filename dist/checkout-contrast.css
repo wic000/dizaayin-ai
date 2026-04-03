@@ -1,0 +1,27 @@
+[class*="glass-panel"] input,
+[class*="glass-panel"] textarea,
+[class*="glass-panel"] select {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #1f1533 !important;
+  border: 1px solid rgba(31, 21, 51, 0.12) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 8px 18px rgba(31, 21, 51, 0.06);
+}
+
+[class*="glass-panel"] input::placeholder,
+[class*="glass-panel"] textarea::placeholder {
+  color: #725f86 !important;
+  opacity: 1 !important;
+}
+
+[class*="glass-panel"] .text-candy-ink\/60,
+[class*="glass-panel"] .text-candy-ink\/65,
+[class*="glass-panel"] .text-candy-ink\/70 {
+  color: #312144 !important;
+}
+
+[class*="glass-panel"] .bg-white\/70,
+[class*="glass-panel"] .bg-white\/80 {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
